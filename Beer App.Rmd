@@ -3,12 +3,14 @@ title: "Beer App"
 author: "Nathan Deinlein"
 date: "2/4/2021"
 output: html_document
+runtime: shiny
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r echo = FALSE}
 library(shiny)
 
 ui <- fluidPage(
@@ -117,4 +119,5 @@ server <- function(input, output) {
   
 }
 shinyApp(ui, server)
+
 ```
