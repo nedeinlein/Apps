@@ -54,7 +54,6 @@ server <- function(input, output) {
   output$distPlot <- renderPlot({
     df <- read.csv('https://raw.githubusercontent.com/nedeinlein/nedeinlein.github.io/main/Beer%20Data%20for%20Shiny%20app.csv')
     data <- df
-    x <- data$abv
     
     if(input$chart == "H")
     {
