@@ -13,7 +13,7 @@ ui <- fluidPage(
       
       #State Select select
       selectInput("state", label = h3("State"), 
-                  choices = list("ALL" = "ALL", "AK" = "AK", "AL" = "AL", "AR" = "AR", "AZ" = "AZ", "CA" = "CA", 'CO' = 'CO', 'CT' = 'CT', 'DE' = 'DE'), 
+                  choices = list("ALL","AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN","MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA","WA", "WV", "WI", "WY"), 
                   selected = 1),
       
       #Chart Type select
@@ -21,10 +21,16 @@ ui <- fluidPage(
                   choices = list("Histogram" = "H", "Boxplot" = "B", "Scatterplot (ABV Only)" = "S"), 
                   selected = 1),
       
+      
       #ABV vs IBU selector 
       selectInput("select", label = h3("Alcohol Content or Bitterness"), 
-                  choices = list("ABV" = "ABV", "IBU" = "IBU"), 
+                  choices = list("ABV", "IBU"), 
                   selected = 1),
+      
+      radioButtons("radio", label = h3("Regression"),
+                   choices = list("Regression On" = 1, "Regression Off" = 2), 
+                   selected = 1),
+      
       hr(),
       fluidRow(column(3, verbatimTextOutput("value")))
     ),
@@ -53,46 +59,43 @@ server <- function(input, output) {
   # 2. Its output type is a plot
   output$distPlot <- renderPlot({
     df <- read.csv('https://raw.githubusercontent.com/nedeinlein/nedeinlein.github.io/main/Beer%20Data%20for%20Shiny%20app.csv')
-    data <- df
     
+    
+    #state filter    
+    state <- input$state
+    
+    if(state == "ALL")
+    {
+      data <- df
+    }
+    if(state != "ALL")
+    {
+      data <- df %>% filter(abbr == state)
+    }
+    #method select
+    if(input$select == "ABV")
+    {
+      x <- data$ABV
+      y <- "Alcohol By Volume"
+    }
+    if(input$select == "IBU")
+    {
+      x <- data$IBU
+      y <- "International Bitterness Unit"
+    }
+    
+    #chart selection
     if(input$chart == "H")
     {
-      if(input$select == "ABV")
-      {
-        x    <- data$ABV
-        
-        hist(x, col = "#75AADB", border = "white",
-             xlab = "Alcohol By Volume",
-             main = "Histogram of ABV")
-      }
-      if(input$select == "IBU")
-      {
-        x    <- data$IBU
-        
-        hist(x, col = "#75AADB", border = "white",
-             xlab = "International Bitterness Units",
-             main = "Histogram US IBU")
-      }
+      hist(x, col = "#75AADB", border = "white",
+           xlab = y,
+           main = "Histogram")
     }
     if(input$chart == "B")
     {
-      if(input$select == "ABV")
-      {
-        x    <- data$ABV
-        
-        boxplot(x, col = "#75AADB", border = "Black",
-                ylab = "Alcohol By Volume",
-                main = "Boxplot of ABV")
-        
-      }
-      if(input$select == "IBU")
-      {
-        x    <- data$IBU
-        
-        boxplot(x, col = "#75AADB", border = "Black",
-                ylab = "International Bitterness Units",
-                main = "Boxplot US IBU")
-      }
+      boxplot(x, col = "#75AADB", border = "Black",
+              ylab = y,
+              main = "Boxplot")
     }
     if(input$chart == "S")
     {
