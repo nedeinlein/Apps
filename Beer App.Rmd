@@ -11,10 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r echo = FALSE}
-library(shiny)
-library(markdown)
-
-library(markdown)
+suppressMessages(library(shiny))
+suppressMessages(library(dplyr))
+suppressMessages(library(markdown))
 
 ui <-navbarPage("National Beers 101",
                  tabPanel("Plot",
@@ -95,7 +94,7 @@ server <- function(input, output, session) {
     }
     if(state != "ALL")
     {
-      data <- filter(df,abbr == state)
+      data <- df %>% filter(abbr == state)
     }
     #beer type color filter
     if(input$bt == 1)
@@ -188,6 +187,5 @@ server <- function(input, output, session) {
   })
 }
 shinyApp(ui, server, options = list(height = 1080, width = 1080))
-
 
 ```

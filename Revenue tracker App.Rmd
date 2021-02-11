@@ -1,0 +1,112 @@
+---
+title: "Revenue Tracker App"
+author: "Nathan Deinlein"
+date: "2/18/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r echo = FALSE}
+suppressMessages(library(shiny))
+suppressMessages(library(dplyr))
+suppressMessages(library(markdown))
+suppressMessages(library(ggplot2))
+suppressMessages(library(tidyverse))
+vardf <- read.csv("https://raw.githubusercontent.com/nedeinlein/Apps/main/Customer%20List.csv")
+
+ui <-navbarPage("Revenue Tracker",
+                tabPanel("Plot",
+                         sidebarLayout(
+                           sidebarPanel(
+                             #CSV upload
+                             fileInput("file", "Choose CSV File", accept = ".csv"),
+                             checkboxInput("header", "Header", TRUE),
+                             
+                             #Select Year
+                             selectInput("year", label = h3("Year"), 
+                                         choices = c(sort(unique(vardf$Year))), 
+                                         selected = 1),
+                             
+                             #Revenue Type 
+                             selectInput("portal", label = h3("Portal"), 
+                                         choices = list("All", "MOBI", "Austin"), 
+                                         selected = 1),
+                             
+                             #Customer Code
+                             selectInput("cust", label = h3("Customer"), 
+                                         choices = c("All", sort(unique(vardf$WMS.Item.family))), 
+                                         selected = 1),
+                             #Revenue Type
+                             selectInput("type", label = h3("Revenue Type"), 
+                                         choices = c("All", sort(unique(vardf$Revenue.Type))), 
+                                         selected = 1),
+                             hr(),
+                             fluidRow(column(3, verbatimTextOutput("value")))
+                           ),
+                           
+                           # Main panel for displaying outputs ----
+                           mainPanel(
+                             
+                             # Output: Histogram ----
+                             plotOutput(outputId = "distPlot")
+                           )
+                         )
+                ),
+                tabPanel("Summary",
+                         verbatimTextOutput("summary")
+                ),
+                navbarMenu("More",
+                           tabPanel("Table",
+                                    DT::dataTableOutput("table")
+                           ),
+                           tabPanel("About",
+                                    fluidRow(
+                                      column(6,
+                                             includeMarkdown("https://raw.githubusercontent.com/nedeinlein/Apps/main/Revenuetracker.About.rmd")
+                                      ),
+                                    )
+                           )
+                )
+)
+
+
+server <- function(input, output, session) {
+
+  
+  #reactive filters
+  data <- reactive({
+    file <-input$file
+    df <- read.csv(file$datapath, header = input$header)
+    rows <- (input$year == "All" | df$Year == input$year) &
+      (input$portal == "All" | df$Revenue.Stream == input$portal) &
+      (input$cust == "All" | df$WMS.Item.family == input$cust) &
+      (input$type == "All" | df$Revenue.Type == input$type)
+    df[rows,,drop = FALSE]  
+  })
+  
+  
+  #Output
+  output$distPlot <- renderPlot({
+    req(data())
+    data() %>% mutate(Month = fct_reorder(Month, Month.Number)) %>% ggplot(aes(x = Month, y = Rev.Type.Total, fill = Revenue.Type)) + geom_bar(stat = 'sum') + ylab("Revenue")
+  })
+  
+  #summary Output
+  output$summary <- renderPrint({
+    summary(data())
+  })
+  
+  #table Output
+  output$table <- DT::renderDataTable({
+    DT::datatable(data())
+  })
+}
+
+shinyApp(ui, server, options = list(height = 1080, width = 1080))
+
+```

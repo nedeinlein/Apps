@@ -1,0 +1,12 @@
+---
+title: "About Me"
+author: "Nathan Deinlein"
+date: "2/3/2021"
+output: html_document
+---
+
+
+## Basic Information
+
+My name is Nathan Deinlein. This app was created for my department as a way to track revenue types using an upload file.
+

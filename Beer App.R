@@ -1,6 +1,9 @@
-library(markdown)
+library(shiny)
 library(dplyr)
-ui <- navbarPage("National Beers 101",
+library(markdown)
+suppressMessages(library(shiny))
+
+ui <-navbarPage("National Beers 101",
                  tabPanel("Plot",
                           sidebarLayout(
                             sidebarPanel(
@@ -62,8 +65,7 @@ ui <- navbarPage("National Beers 101",
                                      )
                             )
                  )
-)
-
+  )
 
 
 server <- function(input, output, session) {
@@ -80,7 +82,7 @@ server <- function(input, output, session) {
     }
     if(state != "ALL")
     {
-      data <- df %>% filter(abbr == state)
+      data <- df %<% filter(abbr = state)
     }
     #beer type color filter
     if(input$bt == 1)
@@ -172,4 +174,4 @@ server <- function(input, output, session) {
     DT::datatable(df)
   })
 }
-shinyApp(ui, server)
+shinyApp(ui, server, options = list(height = 1080, width = 1080))
