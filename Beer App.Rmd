@@ -14,7 +14,9 @@ knitr::opts_chunk$set(echo = TRUE)
 library(shiny)
 library(markdown)
 
-ui <- navbarPage("National Beers 101",
+library(markdown)
+
+ui <-navbarPage("National Beers 101",
                  tabPanel("Plot",
                           sidebarLayout(
                             sidebarPanel(
@@ -76,8 +78,7 @@ ui <- navbarPage("National Beers 101",
                                      )
                             )
                  )
-)
-
+  )
 
 
 server <- function(input, output, session) {
@@ -186,7 +187,7 @@ server <- function(input, output, session) {
     DT::datatable(df)
   })
 }
-shinyApp(ui, server)
+shinyApp(ui, server, options = list(height = 1080, width = 1080))
 
 
 ```
