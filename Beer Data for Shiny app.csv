@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ,Name.x,Beer_ID,ABV,IBU,Brewery_id,Style,Ounces,Name.y,City,State,abbr,Beerclass,Beerclass_Colour
 393,Bitter Bitch,1979,0.061,60,178,American Pale Ale (APA),12,18th Street Brewery,Gary, IN,IN,ALE,red
 394,Bitter American,876,0.044,42,369,American Pale Ale (APA),12,21st Amendment Brewery,San Francisco, CA,CA,ALE,red
@@ -1044,8 +1043,6 @@
 390,Lights Out Vanilla Cream Extra Stout,1513,0.077,30,200,American Double / Imperial IPA,12,Worthy Brewing Company,Bend, OR,OR,IPA,darkgreen
 391,Worthy IPA (2013),1512,0.069,69,200,American IPA,12,Worthy Brewing Company,Bend, OR,OR,IPA,darkgreen
 392,Belgorado,928,0.067,45,425,Belgian IPA,12,Wynkoop Brewing Company,Denver, CO,CO,IPA,darkgreen
-=======
-,Name.x,Beer_ID,ABV,IBU,Brewery_id,Style,Ounces,Name.y,City,State,abbr,Beerclass,Beerclass_Colour
 393,Bitter Bitch,1979,0.061,60,178,American Pale Ale (APA),12,18th Street Brewery,Gary, IN,IN,ALE,red
 394,Bitter American,876,0.044,42,369,American Pale Ale (APA),12,21st Amendment Brewery,San Francisco, CA,CA,ALE,red
 395,Special Edition: Allies Win The War!,531,0.085,52,369,English Strong Ale,12,21st Amendment Brewery,San Francisco, CA,CA,ALE,red
@@ -2090,4 +2087,4 @@
 390,Lights Out Vanilla Cream Extra Stout,1513,0.077,30,200,American Double / Imperial IPA,12,Worthy Brewing Company,Bend, OR,OR,IPA,darkgreen
 391,Worthy IPA (2013),1512,0.069,69,200,American IPA,12,Worthy Brewing Company,Bend, OR,OR,IPA,darkgreen
 392,Belgorado,928,0.067,45,425,Belgian IPA,12,Wynkoop Brewing Company,Denver, CO,CO,IPA,darkgreen
->>>>>>> cf194c6af61b4a6f3400979f8b82359950cad22e
+
