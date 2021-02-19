@@ -3,13 +3,12 @@ title: "Revenue Tracker App"
 author: "Nathan Deinlein"
 date: "2/18/2021"
 output: html_document
+runtime: shiny
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-
 
 ```{r echo = FALSE}
 suppressMessages(library(shiny))
