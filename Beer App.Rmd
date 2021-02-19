@@ -65,7 +65,7 @@ ui <-navbarPage("National Beers 101",
                             tabPanel("About",
                                      fluidRow(
                                        column(6,
-                                              includeMarkdown("https://raw.githubusercontent.com/nedeinlein/nedeinlein.github.io/main/About.rmd")
+                                              includeMarkdown("https://raw.githubusercontent.com/nedeinlein/First-Webpage/main/About.rmd")
                                        ),
                                        column(3,
                                               img(class="img-polaroid",height="200%", width = "200%",
@@ -81,7 +81,7 @@ ui <-navbarPage("National Beers 101",
 
 
 server <- function(input, output, session) {
-  df <- read.csv('https://raw.githubusercontent.com/nedeinlein/nedeinlein.github.io/main/Beer%20Data%20for%20Shiny%20app.csv')
+  df <- read.csv('https://raw.githubusercontent.com/nedeinlein/Apps/main/Beer%20Data%20for%20Shiny%20app.csv')
   df$Beerclass <- as.factor(df$Beerclass)
   output$distPlot <- renderPlot({
     
