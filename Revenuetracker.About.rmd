@@ -10,3 +10,4 @@ output: html_document
 
 My name is Nathan Deinlein. This app was created for my department as a way to track revenue types using an upload file.
 
+>>>>>>> 8ee83860fe3c1cdd3a95806aa5ff4cd9e4e0db7a
