@@ -69,7 +69,7 @@ ui <-navbarPage("National Beers 101",
 
 
 server <- function(input, output, session) {
-  df <- read.csv('https://raw.githubusercontent.com/nedeinlein/nedeinlein.github.io/main/Beer%20Data%20for%20Shiny%20app.csv')
+  df <- read.csv('https://raw.githubusercontent.com/nedeinlein/Apps/main/Beer%20Data%20for%20Shiny%20app.csv')
   df$Beerclass <- as.factor(df$Beerclass)
   output$distPlot <- renderPlot({
     
