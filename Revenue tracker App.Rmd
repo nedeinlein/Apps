@@ -1,7 +1,5 @@
 ---
 title: "Revenue Tracker App"
-author: "Nathan Deinlein"
-date: "2/18/2021"
 output: html_document
 runtime: shiny
 ---
