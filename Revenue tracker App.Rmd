@@ -18,7 +18,7 @@ suppressMessages(library(tidyverse))
 
 vardf <- read.csv("https://raw.githubusercontent.com/nedeinlein/Apps/main/Customer%20List.csv")
 
-ui <-navbarPage("Revenue Tracker",theme = shinytheme("slate"),
+ui <-navbarPage("Revenue Tracker",theme = shinytheme("slate"),fluid = TRUE,
                 tabPanel("Plot",
                          sidebarLayout(
                            sidebarPanel(
