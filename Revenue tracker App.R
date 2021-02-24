@@ -1,11 +1,13 @@
 suppressMessages(library(shiny))
+suppressMessages(library(shinythemes))
 suppressMessages(library(dplyr))
 suppressMessages(library(markdown))
 suppressMessages(library(ggplot2))
 suppressMessages(library(tidyverse))
+
 vardf <- read.csv("https://raw.githubusercontent.com/nedeinlein/Apps/main/Customer%20List.csv")
 
-ui <-navbarPage("Revenue Tracker",
+ui <-navbarPage("Revenue Tracker", theme = shinytheme("slate"),
                 tabPanel("Plot",
                          sidebarLayout(
                            sidebarPanel(
