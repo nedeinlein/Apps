@@ -18,7 +18,7 @@ suppressMessages(library(tidyverse))
 
 vardf <- read.csv("https://raw.githubusercontent.com/nedeinlein/Apps/main/Customer%20List.csv")
 
-ui <-navbarPage("Revenue Tracker",theme = shinytheme("slate"),fluid = TRUE,
+ui <-navbarPage("Revenue Tracker",theme = shinytheme("slate"),
                 tabPanel("Plot",
                          sidebarLayout(
                            sidebarPanel(
@@ -106,6 +106,6 @@ server <- function(input, output, session) {
   })
 }
 
-shinyApp(ui, server)
+shinyApp(ui, server, options = list(height = "100%", width = "100%"))
 
 ```
